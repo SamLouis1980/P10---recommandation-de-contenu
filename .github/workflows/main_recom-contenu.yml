@@ -48,6 +48,14 @@ jobs:
             echo "requirements.txt manquant, un fichier minimal a été créé."
           fi
 
+      - name: Vérifier la présence de recommendation/__init__.py
+        run: |
+          if [ ! -f "recommendation/__init__.py" ]; then
+            echo "ERREUR : recommendation/__init__.py n'existe pas !"
+            exit 1
+          fi
+
+
       - name: Install dependencies
         run: pip install -r requirements.txt
 
