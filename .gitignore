@@ -1,4 +1,4 @@
-# Ignore les fichiers de configuration locale
+# Ignorer les fichiers de configuration locale
 local.settings.json
 .venv/
 __pycache__/
