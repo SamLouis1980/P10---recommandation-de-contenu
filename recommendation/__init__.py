@@ -8,6 +8,7 @@ from io import BytesIO
 from azure.storage.blob import BlobServiceClient
 import os
 
+# modification pour forcer deploiement
 # Récupérer la connexion Azure Blob Storage depuis les variables d'environnement
 STORAGE_CONNECTION_STRING = os.getenv("AzureWebJobsStorage")
 CONTAINER_NAME = "recom-storage"
