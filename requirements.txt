@@ -1,0 +1,5 @@
+azure-functions
+numpy
+pandas
+scikit-surprise
+azure-storage-blob
