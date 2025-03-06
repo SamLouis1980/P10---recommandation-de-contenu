@@ -7,6 +7,7 @@ import pickle
 from io import BytesIO
 from azure.storage.blob import BlobServiceClient
 
+# modification mineure pour deploiement
 # Configuration de l'accès à Azure Blob Storage
 STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=recomcontenugroup8ae8;AccountKey=TON_CLEF;EndpointSuffix=core.windows.net"
 CONTAINER_NAME = "recom-storage"
