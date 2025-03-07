@@ -1,6 +1,6 @@
 azure-functions
 azure-storage-blob
-numpy
+numpy==1.26.4
 pandas
 scikit-surprise
 streamlit
