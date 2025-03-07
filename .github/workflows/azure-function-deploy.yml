@@ -1,4 +1,4 @@
-name: Deploy Azure Function - recom-contenu
+name: Build and deploy Python project to Azure Function App - recom-contenu
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: read 
 
     steps:
       - name: Checkout repository
@@ -25,17 +25,41 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Create and start virtual environment
+        run: |
+          python -m venv venv
+          echo "✅ Virtual environment created"
+
+      - name: Vérifier la présence de host.json
+        run: |
+          if [ ! -f "host.json" ]; then
+            echo '{}' > host.json
+            echo "⚠️ host.json manquant, un fichier par défaut a été créé."
+          fi
+
+      - name: Vérifier la présence de requirements.txt
+        run: |
+          if [ ! -f "requirements.txt" ]; then
+            echo "flask" > requirements.txt
+            echo "⚠️ requirements.txt manquant, un fichier minimal a été créé."
+          fi
+
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          source venv/bin/activate || . venv/bin/activate
+          pip install -r requirements.txt
+          echo "✅ Dépendances installées"
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r -x ".git/*"
+        run: zip release.zip ./* -r -x "*.git*" "venv/*"
 
-      - name: Upload artifact
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: function-package
-          path: release.zip
+          name: python-app
+          path: |
+            release.zip
+            !venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,29 +69,31 @@ jobs:
       contents: read 
 
     steps:
-      - name: Download artifact
+      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: function-package
+          name: python-app
 
-      - name: Unzip artifact
-        run: unzip release.zip
+      - name: Unzip artifact for deployment
+        run: unzip release.zip     
 
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ AZUREAPPSERVICE_CLIENTID_E3F14F6BC9944635BF7C34FDCB59624C }}
-          tenant-id: ${{ AZUREAPPSERVICE_TENANTID_963E3A9B12D74A709C38D9DD28C46678 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E3F14F6BC9944635BF7C34FDCB59624C }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_963E3A9B12D74A709C38D9DD28C46678 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0FB2FE9E9C7F4E0CB9F7314C9DF32CD9 }}
 
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
+        id: deploy-to-function
         with:
           app-name: 'recom-contenu'
+          slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
 
-      - name: Capture logs on failure
+      - name: Capture logs if deployment fails
         if: failure()
         run: |
-          echo "Le déploiement a échoué. Logs :"
+          echo "❌ Le déploiement a échoué. Voici les logs :"
           cat /home/runner/.func/logs/*.log || echo "Aucun log trouvé."
