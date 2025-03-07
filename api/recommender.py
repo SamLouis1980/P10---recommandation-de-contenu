@@ -5,7 +5,7 @@ from io import BytesIO
 from azure.storage.blob import BlobServiceClient
 
 # Configuration Azure Blob Storage / penser a la clef
-STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=recomcontenugroup8ae8;AccountKey=TON_CLEF;EndpointSuffix=core.windows.net"
+STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=recomcontenugroup8ae8;AccountKey=FAvE/Nt5g064tLp8hc5+3BlHfWcOq3Ra5VQg+EIf1pROOCQEatAWduZo5PuuXpuML3V5gVI3+o5y+AStL4naGQ==;EndpointSuffix=core.windows.net"
 CONTAINER_NAME = "recom-storage"
 
 # Initialisation du client Azure Blob Storage
