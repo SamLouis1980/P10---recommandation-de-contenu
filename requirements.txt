@@ -1,0 +1,7 @@
+azure-functions
+azure-storage-blob
+numpy
+pandas
+scikit-surprise
+streamlit
+requests
