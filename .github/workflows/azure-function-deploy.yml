@@ -25,11 +25,6 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Create and start virtual environment
-        run: |
-          python -m venv venv
-          echo "✅ Virtual environment created"
-
       - name: Vérifier la présence de host.json
         run: |
           if [ ! -f "host.json" ]; then
@@ -40,26 +35,23 @@ jobs:
       - name: Vérifier la présence de requirements.txt
         run: |
           if [ ! -f "requirements.txt" ]; then
-            echo "flask" > requirements.txt
+            echo "numpy" > requirements.txt
             echo "⚠️ requirements.txt manquant, un fichier minimal a été créé."
           fi
 
-      - name: Install dependencies
+      - name: Installer les dépendances (dans wwwroot)
         run: |
-          source venv/bin/activate || . venv/bin/activate
-          pip install -r requirements.txt
+          pip install -r requirements.txt -t .python_packages/lib/site-packages
           echo "✅ Dépendances installées"
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r -x "*.git*" "venv/*"
+        run: zip release.zip ./* -r -x "*.git*"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
