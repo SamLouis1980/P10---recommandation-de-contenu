@@ -1,3 +1,3 @@
 # P10---recommandation-de-contenu
 
-présentation
+présentation du projet
