@@ -5,5 +5,4 @@ pandas
 scikit-learn
 scikit-surprise
 scipy
-azure-storage-blob
 google-cloud-storage
