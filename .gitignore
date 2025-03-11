@@ -1,0 +1,26 @@
+# Ignorer l'environnement virtuel
+.venv/
+venv/
+
+# Ignorer les fichiers spécifiques à Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorer les fichiers de logs et caches
+*.log
+*.cache
+
+# Ignorer les fichiers spécifiques à l'IDE
+.vscode/
+.idea/
+*.swp
+
+# Ignorer les fichiers de configuration locaux
+.env
+
+# Ignorer les fichiers volumineux qu'on met sur GCS
+top_n_recommendations_by_id.npy
+articles_embeddings_pca.npy
+merged_interactions.csv
+svd_best_model2.pkl
