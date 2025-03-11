@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+numpy==1.26.4
+pandas
+scikit-learn
+scikit-surprise
+scipy
+azure-storage-blob
+google-cloud-storage
