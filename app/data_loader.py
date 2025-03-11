@@ -10,7 +10,7 @@ BUCKET_NAME = "p10_recommend"
 
 def download_from_gcp(file_name):
     """Télécharge un fichier depuis Google Cloud Storage et le stocke en local."""
-    client = storage.Client()
+    client = storage.Client.create_anonymous_client()
     bucket = client.bucket(BUCKET_NAME)
     blob = bucket.blob(file_name)
     local_path = os.path.join(os.getcwd(), file_name)
