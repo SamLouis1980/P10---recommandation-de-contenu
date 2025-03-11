@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-numpy
-pandas
-scikit-learn
-scipy
-azure-storage-blob
-google-cloud-storage
