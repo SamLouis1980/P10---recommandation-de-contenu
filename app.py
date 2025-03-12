@@ -20,7 +20,7 @@ if st.button("Obtenir les recommandations"):
                 if recommendations:
                     st.subheader("🎯 Articles recommandés :")
                     for rec in recommendations:
-                        st.write(f"📖 **Article ID:** {rec['id']} - ⭐ **Score:** {rec['score']:.2f}")
+                        st.write(f"📖 **Article ID:** {rec['id']}")
                 else:
                     st.warning("⚠️ Aucune recommandation trouvée.")
             else:
