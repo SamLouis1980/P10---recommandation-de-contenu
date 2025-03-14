@@ -1,4 +1,4 @@
-# Recommandation de Contenu – Projet 10
+# Projet 10 - Recommandation de Contenu
 
 ### Description du projet
 Ce projet consiste à développer un système de recommandation de contenu pour la startup My Content. L’objectif est de proposer à chaque utilisateur 5 articles personnalisés en combinant deux approches :
