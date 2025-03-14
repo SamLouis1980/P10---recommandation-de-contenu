@@ -17,6 +17,7 @@ Clé API Google Cloud configurée
 
 ##### Cloner le projet
 git clone https://github.com/SamLouis1980/P10---Recommandation-de-Contenu.git
+
 cd P10---Recommandation-de-Contenu
 
 ##### Lancer l’interface Streamlit (locale)
@@ -24,8 +25,20 @@ streamlit run app.py
 
 ### Description des fichiers et dossiers
 
+.gitignore → Liste des fichiers à ignorer
+Dockerfile → Fichier pour créer l’image Docker de l’API
+docker-compose.yml → Configuration pour exécuter le projet en local
+requirements.txt → Dépendances nécessaires pour l'API
+app.py → Interface utilisateur (Streamlit)
+
 ##### cloud_function/
 Contient le code de la Google Cloud Function, qui sert d’intermédiaire entre l’interface et l’API.
 main.py → Code de la Cloud Function.
 requirements.txt → Liste des dépendances nécessaires.
+
+##### app/
+main.py → Contient les endpoints de l’API
+model.py → Implémente le système de recommandation
+data_loader.py → Chargement des modèles et des fichiers
+utils.py → Fonctions utilitaires diverses
 
